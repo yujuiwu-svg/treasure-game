@@ -53,6 +53,7 @@
       target: 'esnext',
       outDir: 'build',
     },
+    base: '/treasure-game/',
     server: {
       port: 3000,
       open: true,
