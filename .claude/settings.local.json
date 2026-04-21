@@ -15,7 +15,8 @@
       "Bash(npm run *)",
       "Bash(git restore *)",
       "Bash(rm -rf assets)",
-      "Bash(git worktree *)"
+      "Bash(git worktree *)",
+      "Bash(git pull *)"
     ]
   }
 }
