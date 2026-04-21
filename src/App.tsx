@@ -38,12 +38,13 @@ export default function App() {
   const [scoreHistory, setScoreHistory] = useState<{ score: number; played_at: string }[]>([]);
 
   const initializeGame = () => {
-    const treasureBoxIndex = Math.floor(Math.random() * 3);
+    // Pick 1 random index to be the evil box; the other 2 are treasure
+    const evilBoxIndex = Math.floor(Math.random() * 3);
     setBoxes(
       Array.from({ length: 3 }, (_, index) => ({
         id: index,
         isOpen: false,
-        hasTreasure: index === treasureBoxIndex,
+        hasTreasure: index !== evilBoxIndex,
       }))
     );
     setScore(0);
@@ -75,9 +76,9 @@ export default function App() {
         return box;
       });
 
-      const treasureFound = updatedBoxes.some((box) => box.isOpen && box.hasTreasure);
+      const evilOpened = updatedBoxes.some((box) => box.isOpen && !box.hasTreasure);
       const allOpened = updatedBoxes.every((box) => box.isOpen);
-      if (treasureFound || allOpened) {
+      if (evilOpened || allOpened) {
         setGameEnded(true);
       }
 
@@ -339,9 +340,9 @@ export default function App() {
                     <span className={score >= 0 ? 'text-green-600' : 'text-red-600'}>${score}</span>
                   </p>
                   <p className="text-sm text-amber-600 mt-2">
-                    {boxes.some((box) => box.isOpen && box.hasTreasure)
-                      ? 'Treasure found! Well done, treasure hunter! 🎉'
-                      : 'No treasure found this time! Better luck next time! 💀'}
+                    {boxes.some((box) => box.isOpen && !box.hasTreasure)
+                      ? 'You hit the evil box! Better luck next time! 💀'
+                      : 'You found all the treasures! Amazing! 🎉'}
                   </p>
                   {user && (
                     <p className="text-xs text-amber-500 mt-1">✓ Score saved to your account</p>
