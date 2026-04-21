@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r build/. .)",
+      "Bash(rm -rf build)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
