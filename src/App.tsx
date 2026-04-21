@@ -77,8 +77,8 @@ export default function App() {
       });
 
       const evilOpened = updatedBoxes.some((box) => box.isOpen && !box.hasTreasure);
-      const allOpened = updatedBoxes.every((box) => box.isOpen);
-      if (evilOpened || allOpened) {
+      const allTreasuresOpened = updatedBoxes.filter((box) => box.hasTreasure).every((box) => box.isOpen);
+      if (evilOpened || allTreasuresOpened) {
         setGameEnded(true);
       }
 
